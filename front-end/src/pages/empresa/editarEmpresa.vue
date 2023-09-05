@@ -269,11 +269,18 @@ const resetAvatar = () => {
                         type="color"
                       />
                     </VCol>
-                    <VCol cols="12" md="12">
+                    <VCol cols="12" md="6">
                       <V-textarea
                         v-model="empresa.item.descricao"
                         label="Descricao do site"
                         placeholder="ex: Seu site - o site especializado em oferecer o melhor para o seu cliente"
+                      />
+                    </VCol>
+                    <VCol cols="12" md="6">
+                      <V-textarea
+                        v-model="empresa.item.scripts"
+                        label="Scripts para o site"
+                        placeholder="<script> </script>"
                       />
                     </VCol>
                     <VCol cols="12" md="12">

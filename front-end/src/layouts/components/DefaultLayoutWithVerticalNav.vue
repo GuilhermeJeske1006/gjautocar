@@ -1,16 +1,22 @@
 <script setup>
 import VerticalNavSectionTitle from "@/@layouts/components/VerticalNavSectionTitle.vue";
+import { useUsuarioStore } from "@/stores/UsuarioStore";
 import upgradeBannerDark from "@images/pro/upgrade-banner-dark.png";
 import upgradeBannerLight from "@images/pro/upgrade-banner-light.png";
 import VerticalNavLayout from "@layouts/components/VerticalNavLayout.vue";
 import VerticalNavLink from "@layouts/components/VerticalNavLink.vue";
 import { useTheme } from "vuetify";
-
 // Components
 import Footer from "@/layouts/components/Footer.vue";
 import NavbarThemeSwitcher from "@/layouts/components/NavbarThemeSwitcher.vue";
 import UserProfile from "@/layouts/components/UserProfile.vue";
 
+import { onMounted } from "vue";
+const user = useUsuarioStore();
+
+onMounted(() => {
+  user.UsuarioPerfil();
+});
 const vuetifyTheme = useTheme();
 
 const upgradeBanner = computed(() => {
@@ -67,8 +73,17 @@ const upgradeBanner = computed(() => {
       <VerticalNavLink
         :item="{
           title: 'Informações da empresa',
-          icon: 'mdi-account-cog-outline',
+          icon: 'mdi-domain',
           to: '/empresa',
+        }"
+      />
+
+      <VerticalNavLink
+        v-if="user.perfil.is_admin"
+        :item="{
+          title: 'Cadastro de empresa',
+          icon: 'mdi-office-building-plus-outline',
+          to: '/empresa/cadastro',
         }"
       />
 
@@ -104,13 +119,13 @@ const upgradeBanner = computed(() => {
           heading: 'Usuários',
         }"
       />
-      <!-- <VerticalNavLink
+      <VerticalNavLink
         :item="{
           title: 'Listar usuarios',
-          icon: 'bx-log-in',
+          icon: 'mdi-account-details-outline',
           to: '/usuarios/listar',
         }"
-      /> -->
+      />
       <VerticalNavLink
         :item="{
           title: 'Cadastrar usuarios',
@@ -134,7 +149,7 @@ const upgradeBanner = computed(() => {
       <VerticalNavLink
         :item="{
           title: 'Cadastrar automóveis',
-          icon: 'bx-user-plus',
+          icon: 'mdi-plus',
           to: '/automoveis/cadastro',
         }"
       />

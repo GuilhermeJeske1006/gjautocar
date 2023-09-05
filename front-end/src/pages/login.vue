@@ -44,9 +44,9 @@ const isPasswordVisible = ref(false);
             <!-- password -->
             <VCol cols="12">
               <VTextField
-                v-model="User.password"
+                v-model="User.senha"
                 label="Password"
-                placeholder="············"
+                placeholder=""
                 :type="isPasswordVisible ? 'text' : 'password'"
                 :append-inner-icon="isPasswordVisible ? 'bx-hide' : 'bx-show'"
                 @click:append-inner="isPasswordVisible = !isPasswordVisible"

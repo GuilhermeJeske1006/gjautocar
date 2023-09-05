@@ -1,8 +1,8 @@
 <script setup>
 import ModalExcluir from "@/components/automovel/modalExcluir.vue";
+import cardTable from "@/components/cardTable.vue"; // Corrigido o nome do componente para "Tables"
 import Filter from "@/components/filter.vue";
 import loading from "@/components/geral/LoadingOverlay.vue";
-import Tables from "@/components/tables.vue"; // Corrigido o nome do componente para "Tables"
 import router from "@/router";
 import { useAutomovelStore } from "@/stores/AutomovelStore";
 
@@ -11,15 +11,30 @@ import { computed, onMounted, ref, watch } from "vue";
 const auto = useAutomovelStore();
 
 const tableData = ref([]);
-const tableColumns = ref(["Id", "Nome", "Ano/modelo", "final placa"]);
+const tableColumns = ref([
+  "Id",
+  "Nome",
+  "quilometragem",
+  "ano",
+  "placa",
+  "foto",
+  "valor",
+  "cambio",
+  "tipo_combustivel",
+]);
 const actions = ref(["Editar", "Excluir"]);
 
 const updateTableData = (items) => {
   return items.map((item) => ({
     Id: item.id,
-    Nome: item.nome,
-    "Ano/modelo": item.ano,
-    "final placa": item.final_placa,
+    nome: item.nome,
+    ano: item.ano,
+    placa: item.final_placa,
+    foto: item.foto_capa,
+    valor: item.valor,
+    cambio: item.cambio,
+    tipo_combustivel: item.tipo_combustivel,
+    quilometragem: item.quilometragem,
   }));
 };
 
@@ -84,7 +99,7 @@ watch(
           />
         </VCardText>
 
-        <Tables
+        <cardTable
           :items="computedTableData"
           :columns="tableColumns"
           :actions="actions"

@@ -35,16 +35,62 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'nome' => 'required|max:100',
-            'email' => 'required|max:255|unique:empresas',
-            'cor' => 'required',
-            'endereco_id' => 'required'
-        ]);
+        try{
+            DB::beginTransaction();
+            $endereco = new Endereco();
+            $endereco->rua = $request->endereco['rua'];
+            $endereco->bairro = $request->endereco['bairro'];
+            $endereco->cidade = $request->endereco['cidade'];
+            $endereco->estado = $request->endereco['estado'];
+            $endereco->pais = $request->endereco['pais']; 
+            $endereco->cep = $request->endereco['cep']; 
+            $endereco->complemento = $request->endereco['complemento']; 
+            $endereco->numero = $request->endereco['numero']; 
+            $endereco->save(); 
 
-        Empresa::create($request->all());
+
+            $empresa = new Empresa();
+            $base64Image = $request->input('logo');
+
+            if ($base64Image !== null) {
+            
+                if (!Str::contains($base64Image, 'https')) {
+                    list($type, $base64Image) = explode(';', $base64Image);
+                    list(, $base64Image) = explode(',', $base64Image);
+                    $imageData = base64_decode($base64Image);
+                    $imageName = 'image_' . time() . '.png';
+                    $filePath = 'empresas/' . $imageName;
+                    Storage::disk('s3')->put($filePath, $imageData, 'public');
+                    $empresa->logo = $imageName;
+                } 
+            } else {
+                $empresa->logo = null;
+            }
+            
+            $empresa->endereco_id = $endereco->id;
+            $empresa->nome = $request->nome;
+            $empresa->email = $request->email;
+            $empresa->scripts = $request->scripts;
+            $empresa->whatsapp = $request->whatsapp;
+            $empresa->instagram = $request->instagram;
+            $empresa->facebook = $request->facebook;
+            $empresa->telefone = $request->telefone;
+            $empresa->cor = $request->cor;
+            $empresa->descricao = $request->descricao;
+            $empresa->palavras_chaves = $request->palavras_chaves;
+            $empresa->titulo = $request->titulo;
+            $empresa->save();
+
+            DB::commit();
+            return response()->json(["message" => "Empresa cadastrada com sucesso"], 201);
+
+        } catch (\Exception $e){
+            return  $e;
+            return response()->json(["message" => $e], 500);
+            DB::rollBack();
+
+        }
     
-        return response()->json(["message" => "Empresa cadastrada com sucesso"], 201);
     }
 
     /**
@@ -111,6 +157,7 @@ class EmpresaController extends Controller
             $empresa->facebook = $request->facebook;
             $empresa->telefone = $request->telefone;
             $empresa->cor = $request->cor;
+            $empresa->scripts = $request->scripts;
             $empresa->descricao = $request->descricao;
             $empresa->palavras_chaves = $request->palavras_chaves;
             $empresa->titulo = $request->titulo;
@@ -122,6 +169,7 @@ class EmpresaController extends Controller
             $endereco->bairro = $request->endereco['bairro'];
             $endereco->cidade = $request->endereco['cidade'];
             $endereco->estado = $request->endereco['estado'];
+            $endereco->cep = $request->endereco['cep'];
             $endereco->pais = $request->endereco['pais']; 
             $endereco->complemento = $request->endereco['complemento']; 
             $endereco->numero = $request->endereco['numero']; 

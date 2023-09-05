@@ -10,7 +10,7 @@
       />
     </VCol>
     <VCol cols="2" md="1">
-      <VBtn type="submit">
+      <VBtn style="height: 56px" type="submit">
         <IconBtn>
           <VIcon icon="bx-search" />
         </IconBtn>

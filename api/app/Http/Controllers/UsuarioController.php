@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Resources\UsuarioResource;
+use App\Models\EmpresaUsuario;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -181,6 +183,7 @@ class UsuarioController extends Controller
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
+            
             $token = $user->createToken('JWT');
             return response()->json([
                 'token' => $token,
@@ -190,4 +193,15 @@ class UsuarioController extends Controller
 
         return response()->json('Usuario não autenticado', 401);
     }
+
+    public function EmpresaUser($id)
+    {
+        $empresas = DB::table('empresa_usuario')
+        ->where('usuario_id', $id)
+        ->join('empresas', 'empresa_usuario.empresa_id', '=', 'empresas.id')
+        ->get();
+    
+        return response()->json($empresas);
+    }
+
 }

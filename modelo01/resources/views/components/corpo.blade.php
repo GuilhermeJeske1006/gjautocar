@@ -31,7 +31,7 @@ use App\Helpers\ApiHelper;
 <link href="{{ $item->logo }}" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
 <link href="{{ $item->logo }}" sizes="128x128" rel="shortcut icon" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-
+{!! $item->scripts !!}
 </head>
 <body>
 <div class="wrapper">

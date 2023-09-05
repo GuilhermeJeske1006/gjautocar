@@ -35,7 +35,7 @@ class AutomovelController extends Controller
          // Obter a URL da imagem para cada automóvel
          foreach ($automoveis as $automovel) {
             if($automovel->foto_capa != ""){
-                $automovel->foto_capa = Storage::disk('s3')->url($automovel->foto_capa);
+                $automovel->foto_capa = Storage::disk('s3')->url("automovel/".$automovel->foto_capa);
             }
          }
 

@@ -23,7 +23,7 @@ class EmpresaResource extends JsonResource
             'instagram' => $this->instagram,
             'facebook' => $this->facebook,
             'telefone' => $this->telefone,
-            'telefone' => $this->telefone,
+            'scripts' => $this->scripts,
             'cor' => $this->cor,
             'descricao' => $this->descricao,
             'palavras_chaves' => $this->palavras_chaves,

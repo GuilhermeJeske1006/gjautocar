@@ -31,6 +31,7 @@ class SiteResource extends JsonResource
             'instagram' => $this->empresa->instagram,
             'facebook' => $this->empresa->facebook,
             'telefone' => $this->empresa->telefone,
+            'scripts' => $this->empresa->scripts,
             'cor' => $this->empresa->cor,
             'descricao' => $this->empresa->descricao,
             'palavras_chaves' => $this->empresa->palavras_chaves,

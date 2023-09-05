@@ -55,6 +55,7 @@ Route::delete('/automovel/deletar/{id}', [AutomovelController::class, 'destroy']
 //usuario
 Route::post('/login', [UsuarioController::class, 'Login']);
 
+Route::get('/empresa/usuario/{id}', [UsuarioController::class, 'EmpresaUSer']);
 
 
 // Marcas

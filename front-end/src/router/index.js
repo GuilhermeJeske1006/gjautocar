@@ -1,4 +1,6 @@
+import adminMiddleware from '@/middleware/adminMiddleware'; // Importe o middleware
 import authMiddleware from '@/middleware/authMiddleware'; // Importe o middleware
+
 import { createRouter, createWebHashHistory } from 'vue-router';
 
 const router = createRouter({
@@ -29,6 +31,11 @@ const router = createRouter({
           beforeEnter: authMiddleware,
         },
         {
+          path: 'empresa/cadastro',
+          component: () => import('../pages/empresa/cadastrarEmpresa.vue'),
+          beforeEnter: adminMiddleware,
+        },
+        {
           path: 'typography',
           component: () => import('../pages/typography.vue'),
         },
@@ -56,10 +63,11 @@ const router = createRouter({
           component: () => import('../pages/automoveis/edicao/_id.vue'),
           beforeEnter: authMiddleware,
         },
-        // {
-        //   path: 'usuarios/listar',
-        //   component: () => import('../pages/usuarios/listar.vue'),
-        // },
+        {
+          path: 'usuarios/listar',
+          component: () => import('../pages/usuarios/listar.vue'),
+          beforeEnter: adminMiddleware,
+        },
         {
           path: 'usuarios/cadastro',
           component: () => import('../pages/usuarios/cadastro.vue'),

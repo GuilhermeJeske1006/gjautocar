@@ -8,6 +8,7 @@ export const useUsuarioStore = defineStore('usuario', {
   state() {
     return {
       isLoading: false,
+      modalTrocar: false,
       cadastro: {
         foto: '',
         name: '',
@@ -19,9 +20,12 @@ export const useUsuarioStore = defineStore('usuario', {
       user_id: localStorage.getItem('usuario_id'),
       name: '',
       email: '',
+      empresas_id: '',
       password: '',
       remember: false,
       perfil: [],
+      empresas: [],
+      senha: '',
       password: {
         currentPassword: '',
         newPassword: '',
@@ -44,7 +48,7 @@ export const useUsuarioStore = defineStore('usuario', {
       return new Promise((resolve, reject) => {
         const form = {
           email: this.email,
-          password: this.password,
+          password: this.senha,
         };
 
         axios
@@ -53,6 +57,9 @@ export const useUsuarioStore = defineStore('usuario', {
             localStorage.setItem('token', res.data.token.plainTextToken);
             localStorage.setItem('empresa_id', res.data.user.empresa_id);
             localStorage.setItem('usuario_id', res.data.user.id);
+            if(res.data.user.is_admin == 1){
+              localStorage.setItem('is_admin', res.data.user.is_admin);
+            }
             router.push("/dashboard");
             resolve(); // Resolva a Promise sem nenhum valor adicional
           })
@@ -70,6 +77,7 @@ export const useUsuarioStore = defineStore('usuario', {
       localStorage.removeItem('token');
       localStorage.removeItem('empresa_id');
       localStorage.removeItem('usuario_id');
+      localStorage.removeItem('is_admin');
        router.push("/login");
     },
 
@@ -169,7 +177,7 @@ export const useUsuarioStore = defineStore('usuario', {
 
       return new Promise((resolve, reject) => {
         axios
-          .get(`usuario/${this.user_id}`
+          .get(`usuario/${localStorage.getItem('usuario_id')}`
           )
           .then((res) => {
             this.perfil = res.data.data;
@@ -183,6 +191,43 @@ export const useUsuarioStore = defineStore('usuario', {
           });
       });
     },
+
+    UsuarioEmpresas() {
+      this.isLoading = true
+
+      return new Promise((resolve, reject) => {
+        axios
+          .get(`empresa/usuario/${localStorage.getItem('usuario_id')}`
+          )
+          .then((res) => {
+            this.empresas = res.data;
+            resolve();
+          })
+          .catch((error) => {
+            reject(error);
+          })
+          .finally(() => {
+            this.isLoading = false; // Defina o estado isLoading como false após a chamada
+          });
+      });
+    },
+
+    TrocarEmpresa() {
+      this.isLoading = true;
+    
+      // Remove the previous 'empresa_id' from localStorage if it exists
+      localStorage.removeItem('empresa_id');
+    
+      // Set the new 'empresa_id' from your data (assuming 'this.empresas_id' is the correct property)
+      localStorage.setItem('empresa_id', this.empresas_id);
+    
+      // Assuming you want to reload the page
+      window.location.reload();
+    
+      // If you don't want to reload the entire page, you can remove the 'window.location.reload()' line and directly navigate
+      router.push("/dashboard");
+    },
+    
     
 
     UsuarioDeletar(id){

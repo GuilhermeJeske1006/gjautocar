@@ -1,4 +1,5 @@
 <script setup>
+import modalTrocar from "@/components/usuario/modalTrocar.vue";
 import { useUsuarioStore } from "@/stores/UsuarioStore";
 
 const usuario = useUsuarioStore();
@@ -6,9 +7,16 @@ const usuario = useUsuarioStore();
 onMounted(() => {
   usuario.UsuarioPerfil();
 });
+
+const abrirModal = () => {
+  usuario.modalTrocar = true;
+  usuario.UsuarioEmpresas();
+};
 </script>
 
 <template>
+  <modalTrocar :usuarioId="usuario.usuario_id" />
+
   <VBadge
     dot
     location="bottom right"
@@ -55,6 +63,14 @@ onMounted(() => {
             </template>
 
             <VListItemTitle>Perfil</VListItemTitle>
+          </VListItem>
+
+          <VListItem v-if="usuario.perfil.is_master" @click="abrirModal">
+            <template #prepend>
+              <VIcon class="me-2" icon="mdi-file-replace-outline" size="22" />
+            </template>
+
+            <VListItemTitle>Trocar empresa</VListItemTitle>
           </VListItem>
 
           <!-- 👉 Settings -->
