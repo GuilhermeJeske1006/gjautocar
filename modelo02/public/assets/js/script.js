@@ -1,3 +1,4 @@
+
 (function($) {
     
     "use strict";
@@ -332,8 +333,6 @@
           focusOnSelect: true
         });
     }
-
-    /*  Testimonial-Slider-Owl-carousel  */
     if($('.feature_property_slider').length){
         $('.feature_property_slider').owlCarousel({
             loop:true,
@@ -350,33 +349,11 @@
               '<i class="fa fa-arrow-right"></i>'
             ],
             responsive: {
-                0: {
-                    items: 1,
-                    center: false
-                },
-                480:{
-                    items:1,
-                    center: false
-                },
-                600: {
-                    items: 1,
-                    center: false
-                },
-                768: {
-                    items: 2
-                },
-                992: {
-                    items: 2
-                },
-                1200: {
-                    items: 2
-                },
-                1280: {
-                    items: 3
-                }
+                
             }
         })
     }
+
 
     /*  Testimonial-Slider-Owl-carousel  */
     if($('.testimonial_grid_slider').length){
@@ -1053,3 +1030,65 @@
 
 
 })(window.jQuery);
+
+
+  function getModelo() {
+    var marcaId = document.getElementById('marca').value;
+    var modeloSelect = document.getElementById('modelo');
+    var apiBase = document.querySelector('meta[name="api-base"]').getAttribute('content');
+
+    // Limpar as opções anteriores
+    while (modeloSelect.options.length > 1) {
+        modeloSelect.remove(1);
+    } 
+
+    if (marcaId) {
+        axios.get(`${apiBase}modelos/` + marcaId)
+            .then(function (response) {
+                const modelos = response.data.data;
+
+                modelos.forEach(function (modelo) {
+                    const option = document.createElement('option');
+                    option.value = modelo.id;
+                    option.text = modelo.nome_modelo;
+                    modeloSelect.add(option);
+                });
+
+                $(modeloSelect).selectpicker('refresh');
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+}
+
+	function getOrdenar(){
+    	var ordemSelect = document.getElementById('ordenar').value;
+		
+		if (ordemSelect) {
+        // Fazer uma requisição AJAX para buscar os modelos correspondentes à marca selecionada
+        axios.get('listar/' + ordemSelect)
+            .then(function (response) {
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+}
+
+$('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:10,
+    nav:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:5
+        }
+    }
+})

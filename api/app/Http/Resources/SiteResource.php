@@ -5,19 +5,22 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\AutomovelResource;
+use App\Http\Resources\BlogResource;
 use App\Models\Automovel;
 use App\Models\CategoriaAutomovel;
 use App\Models\Endereco;
 
 class SiteResource extends JsonResource
 {
-    public function __construct($empresa, $endereco, $automoveis, $categoriasAutomovel, $tipoAutomovel)
+    public function __construct($empresa, $endereco, $automoveis, $categoriasAutomovel, $tipoAutomovel, $blogs, $sobre)
     {
         $this->empresa = $empresa;
         $this->endereco = $endereco;
         $this->automoveis = $automoveis;
         $this->categoriasAutomovel = $categoriasAutomovel;
         $this->tipoAutomovel = $tipoAutomovel;
+        $this->blogs = $blogs;
+        $this->sobre = $sobre;
     }
 
     public function toArray($request)
@@ -36,7 +39,7 @@ class SiteResource extends JsonResource
             'descricao' => $this->empresa->descricao,
             'palavras_chaves' => $this->empresa->palavras_chaves,
             'titulo' => $this->empresa->titulo,
-            
+            'sobre' => $this->sobre,
             'endereco' => [
                 'rua' => $this->endereco->rua,
                 'bairro' => $this->endereco->bairro,
@@ -47,6 +50,7 @@ class SiteResource extends JsonResource
                 'numero' => $this->endereco->numero,
             ],
             'automoveis' => AutomovelResource::collection($this->automoveis),
+            'blogs' => BlogResource::collection($this->blogs),
             'categorias_automovel' => $this->categoriasAutomovel,
             'tipo_automovel' => $this->tipoAutomovel
         ];

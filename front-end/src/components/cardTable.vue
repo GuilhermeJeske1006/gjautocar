@@ -15,13 +15,12 @@ export default {
       required: true,
     },
   },
+
   methods: {
     handleActionClick(action, item) {
       this.$emit("action-click", action, item);
     },
-  },
 
-  methods: {
     formatVal(val) {
       return val.toLocaleString("pt-BR", {
         minimumFractionDigits: 2,

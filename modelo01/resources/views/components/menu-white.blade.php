@@ -36,6 +36,10 @@
                        
                     </ul>
                 </li>
+
+                <li>
+                    <a href="{{ route('blogs') }}"><span class="title">Blog</span></a>
+                </li>
                
                 <li class="last">
                     <a href="{{ route('contato') }}"><span class="title">Contato</span></a>
@@ -76,7 +80,8 @@
 
                 </ul>
             </li>
-            
+            <li><a href="{{ route('blogs') }}">Blog</a></li>
+
             <li><a href="{{ route('contato') }}">Contato</a></li>
             
             <li class="cl_btn"><a class="btn btn-block btn-lg btn-thm circle" href="{{ route('favoritos') }}"><span class="flaticon-heart"></span> Ver favoritos</a></li>

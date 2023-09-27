@@ -14,9 +14,10 @@ class SobreController extends Controller
         $dataObj = json_decode($data);
 
         $item = $dataObj->data;
+        $sobre = $item->sobre;
 
         $titulo = "Sobre nós - " . $item->nome;
         
-        return view('sobre.index', compact('titulo'));
+        return view('sobre.index', compact('titulo', 'sobre'));
     }
 }

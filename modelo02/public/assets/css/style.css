@@ -3546,16 +3546,20 @@ form.home5_advanced_search_form .form-group input.form-control::-ms-input-placeh
   height: 860px;
 }
 .home6-overlay:before {
-  background-image: url(../images/background/7.jpg);
+  background-image: url(../images/banner.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   bottom: 0;
   content: "";
-  opacity: 0.7;
+  opacity: 0.9;
   left: 0;
   position: absolute;
   right: 0;
   top: 0;
   width: 100%;
 }
+
 .home8-overlay{
   position: relative;
 }
@@ -6042,14 +6046,19 @@ form.home5_advanced_search_form .form-group input.form-control::-ms-input-placeh
   height: 365px;
 }
 .you-looking-for:before{
-  background-image: url("../images/background/8.jpg");
+  background-image: url(../images/nossos_servicos.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   bottom: 0;
   content: "";
+  opacity: 0.5;
   left: 0;
-  opacity: 1;
   position: absolute;
   right: 0;
   top: 0;
+  width: 100%;
+
 }
 .modern-apertment{
   background-color: rgb(29, 41, 62);
@@ -7376,10 +7385,12 @@ form.home5_advanced_search_form .form-group input.form-control::-ms-input-placeh
 }
 /*== Inner Pages Breadcrumb ==*/
 .inner_page_breadcrumb {
-  background-image: url(../images/background/inner-pagebg.jpg);
+  background-image: url(../images/banner-interno.jpg);
   background-repeat: no-repeat;
   height: 410px;
   position: relative;
+  background-position: center;
+  background-size: cover;
 }
 .inner_page_breadcrumb:before{
   background-color: rgb(29, 41, 62);
@@ -16530,4 +16541,53 @@ button.gm-ui-hover-effect:focus {
 }
 [disabled].noUi-origin,[disabled] .noUi-handle {
   cursor: not-allowed;
+}
+
+.cookies-eu-banner {
+  background: #444;
+  color: #fff;
+  padding: 13px;
+  font-size: 15px;
+  text-align: center;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  z-index: 10;
+}
+
+.cookies-eu-banner button {
+  text-decoration: none;
+  background: #222;
+  color: #fff;
+  border: 1px solid #000;
+  cursor: pointer;
+  padding: 4px 7px;
+  margin: 2px 0;
+  font-size: 13px;
+  font-weight: 700;
+  transition: background 0.07s, color 0.07s, border-color 0.07s;
+}
+
+.cookies-eu-banner button:hover {
+  background: #fff;
+  color: #222;
+}
+
+.mobile-content {
+  display: none !important; /* Ocultar por padrão */
+}
+
+.desktop-content {
+  display: block !important; /* Exibir por padrão */
+}
+
+/* Mídia query para dispositivos com largura máxima de 768px (pode ser ajustada) */
+@media (max-width: 768px) {
+  .mobile-content {
+      display: block !important; /* Exibir em dispositivos móveis */
+  }
+  
+  .desktop-content {
+      display: none !important; /* Ocultar em dispositivos móveis */
+  }
 }

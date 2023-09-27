@@ -4,6 +4,7 @@ import App from '@/App.vue';
 import vuetify from '@/plugins/vuetify';
 import { loadFonts } from '@/plugins/webfontloader';
 import router from '@/router';
+import CKEditor from '@ckeditor/ckeditor5-vue';
 import '@core/scss/template/index.scss';
 import '@layouts/styles/index.scss';
 import '@styles/styles.scss';
@@ -26,6 +27,7 @@ app.use(vuetify)
 app.use(Toast);
 app.use(createPinia())
 app.use(router)
+app.use(CKEditor);
 
 // Mount vue app
 app.mount('#app')

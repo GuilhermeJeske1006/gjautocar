@@ -5,8 +5,8 @@
         <div class="row">
             <div class="col-lg-6 offset-lg-3">
                 <div class="main-title text-center mb30">
-                    <h2>What are you looking for?</h2>
-                    <p>We provide full service at every step.</p>
+                    <h2 style="color:#f4f4f4">Nossos serviços</h2>
+                    <p style="color:#f4f4f4">We provide full service at every step.</p>
                 </div>
             </div>
         </div>

@@ -29,6 +29,11 @@ class Empresa extends Model
         return $this->hasMany(Automovel::class);
     }
 
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class);
+    }
+
     public function endereco()
     {
         return $this->hasOne(Endereco::class);

@@ -13,55 +13,42 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <a href="#" class="navbar_brand float-left dn-smd">
-                <img class="logo1 img-fluid" src="images/header-logo2.png" alt="header-logo.png">
-                <img class="logo2 img-fluid" src="images/header-logo2.png" alt="header-logo2.png">
+            <a href="/" wire:navigate class="navbar_brand float-left dn-smd">
+                <img class="logo1 img-fluid" src="{{ $site->logo }}" alt="header-logo.png">
+                <img class="logo2 img-fluid" src="{{ $site->logo }}" alt="header-logo2.png">
             </a>
             <!-- Responsive Menu Structure-->
             <!--Note: declare the Menu style in the data-menu-style="horizontal" (options: horizontal, vertical, accordion) -->
             <div class="ht_left_widget float-left">
-                <ul>
-                    <li class="list-inline-item dn-1440">
-                        <div class="ht_search_widget">
-                            <div class="header_search_widget">
-                                <form class="form-inline mailchimp_form">
-                                    <input type="text" class="form-control" id="inlineFormInputName2" placeholder="What are you looking for?">
-                                    <button type="submit" class="btn btn-primary"><span class="flaticon-magnifying-glass"></span></button>
-                                </form>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-inline-item list_s dib-1440 dn">
-                        <div class="search_overlay">
-                              <a id="search-button-listener" class="mk-search-trigger mk-fullscreen-trigger" href="#">
-                                <span id="search-button"><i class="flaticon-magnifying-glass"></i></span>
-                              </a>
-                        </div>
-                    </li>
-                </ul>
+               
             </div>
             <ul id="respMenu" class="ace-responsive-menu text-right" data-menu-style="horizontal">
                 <li>
-                    <a href="/" wire:navigate><span class="title">Home</span></a>
+                    <a href="/" ><span class="title">Home</span></a>
                     
                 </li>
                 <li>
-                    <a href="/sobre" wire:navigate><span class="title">Sobre nós</span></a>
+                    <a href="/sobre"><span class="title">Sobre nós</span></a>
                     
                 </li>
                 <li>
                     <a href="#"><span class="title">Automoveis</span></a>
                     <ul>
-                        <li><a href="page-blog-v1.html">Blog List 1</a></li>
-                        <li><a href="page-blog-grid.html">Blog List 2</a></li>
-                        <li><a href="page-blog-single.html">Single Post</a></li>
+                        @foreach ($site->tipo_automovel as $item)
+                        <li><a href="{{ route('listar', ['tipo' => $item->id ]) }}" >{{ $item->tipo_automovel }}</a></li>
+                        @endforeach
+                        <li><a href="{{ route('listar') }}">Ver todos</a></li>
+                       
                     </ul>
                 </li>
                 <li class="last">
-                    <a href="page-contact.html"><span class="title">Contato</span></a>
+                    <a href="/contato"  ><span class="title">Contato</span></a>
                 </li>
-                <li class="list-inline-item list_s"><a href="#" class="btn flaticon-user" data-toggle="modal" data-target=".bd-example-modal-lg"> <span class="dn-lg">Login/Register</span></a></li>
-                <li class="list-inline-item add_listing home6"><a href="#"><span class="flaticon-plus"></span><span class="dn-lg"> Create Listing</span></a></li>
+                <li class="list-inline-item list_s">
+                    <a href="" class="btn flaticon-heart"> 
+                        <span class="dn-lg">Ver favoritos</span>
+                    </a>
+                </li>            
             </ul>
         </nav>
     </div>

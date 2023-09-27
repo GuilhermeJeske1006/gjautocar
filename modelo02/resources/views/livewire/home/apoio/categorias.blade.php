@@ -3,15 +3,15 @@
         <div class="row">
             <div class="col-lg-6 offset-lg-3">
                 <div class="main-title text-center">
-                    <h2>Find Properties in These Cities</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <h2>Principais categorias</h2>
+                    <p>Encontre o Modelo Perfeito para Você.</p>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
                 <div class="property_city_home6">
-                    <div class="thumb"><img class="w100" src="images/property/pc18.jpg" alt="pc18.jpg"></div>
+                    <div class="thumb"><img class="w100" src="{{ asset('assets/images/categorias/sedan.jpg') }}" alt="pc18.jpg"></div>
                     <div class="details">
                         <h4>Miami</h4>
                         <p>24 Properties</p>

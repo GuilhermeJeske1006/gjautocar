@@ -68,4 +68,31 @@ class ApiHelper
         
         return $val;
     }
+
+    public static function converterData($dataOriginal) {
+        // Defina o locale para português do Brasil
+        setlocale(LC_TIME, 'pt_BR.utf-8', 'portuguese');
+    
+        // Crie um objeto DateTime para fazer o parsing da data
+        $data = new \DateTime($dataOriginal);
+    
+        // Formate a data no formato desejado (15 de agosto de 2023)
+        $dataFormatada = strftime('%e de %B de %Y', $data->getTimestamp());
+    
+        return $dataFormatada;
+    }
+
+    public static function postComentario($request)
+    {
+        $client = new Client();
+        $url = env('API_BASE') . 'comentario/criar';
+
+        $response = $client->request('POST', $url, [
+            'json' => $request,
+        ]);
+
+        return $response->getBody()->getContents();
+    }
+    
+    
 }

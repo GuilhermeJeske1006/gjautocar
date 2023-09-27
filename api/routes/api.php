@@ -10,6 +10,9 @@ use App\Http\Controllers\AutomovelController;
 use App\Http\Controllers\CategoriaAutomovelController;
 use App\Http\Controllers\ModeloAutomovelController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\SobreController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +37,8 @@ Route::post('/empresa/criar', [EmpresaController::class, 'store']);
 Route::put('/empresa/editar/{id}', [EmpresaController::class, 'update']);
 Route::delete('/empresa/deletar/{id}', [EmpresaController::class, 'destroy']);
 
+
+
 Route::put('/usuario/editar/{id}', [UsuarioController::class, 'update']);
 Route::put('/usuario/editar/senha/{id}', [UsuarioController::class, 'updatePassword']);
 Route::delete('/usuario/deletar/{id}', [UsuarioController::class, 'destroy']);
@@ -48,6 +53,14 @@ Route::get('/automovel/{id}', [AutomovelController::class, 'show']);
 Route::post('/automovel/criar', [AutomovelController::class, 'store']);
 Route::put('/automovel/editar/{id}', [AutomovelController::class, 'update']);
 Route::delete('/automovel/deletar/{id}', [AutomovelController::class, 'destroy']);
+
+
+Route::get('/blogs/{id_empresa?}', [BlogController::class, 'index']);
+Route::get('/blog/{id}', [BlogController::class, 'show']);
+Route::post('/blog/criar', [BlogController::class, 'store']);
+Route::put('/blog/editar/{id}', [BlogController::class, 'update']);
+Route::delete('/blog/deletar/{id}', [BlogController::class, 'destroy']);
+Route::post('/comentario/criar', [BlogController::class, 'storeComentario']);
 });
 
 
@@ -71,3 +84,9 @@ Route::get('/tipos', [TipoAutomovelController::class, 'index']);
 Route::get('/categorias', [CategoriaAutomovelController::class, 'index']);
 
 Route::get('/site/{id_empresa}/{search?}', [SiteController::class, 'index']);
+
+
+
+
+Route::put('/sobre/editar/{id}', [SobreController::class, 'update']);
+Route::get('/sobre/{id}', [SobreController::class, 'show']);

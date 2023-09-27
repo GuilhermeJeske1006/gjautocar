@@ -67,6 +67,34 @@ const upgradeBanner = computed(() => {
       />
       <VerticalNavSectionTitle
         :item="{
+          heading: 'Site',
+        }"
+      />
+      <VerticalNavLink
+        :item="{
+          title: 'Listar postagens',
+          icon: 'mdi-list-box-outline',
+          to: '/blogs/listar',
+        }"
+      />
+
+      <VerticalNavLink
+        :item="{
+          title: 'Cadastrar postagem',
+          icon: 'mdi-post',
+          to: '/blog/cadastro',
+        }"
+      />
+      <VerticalNavLink
+        :item="{
+          title: 'Pagina sobre',
+          icon: 'mdi-information-outline',
+          to: '/sobre/edicao',
+        }"
+      />
+
+      <VerticalNavSectionTitle
+        :item="{
           heading: 'Empresa',
         }"
       />

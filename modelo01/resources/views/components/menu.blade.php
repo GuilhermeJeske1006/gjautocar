@@ -41,7 +41,9 @@
 		                   
 		                </ul>
 		            </li>
-		           
+		           <li>
+		                <a href="{{ route('blogs') }}"><span class="title">Blog</span></a>
+		            </li>
 		            <li class="last">
 		                <a href="{{ route('contato') }}"><span class="title">Contato</span></a>
 		            </li>
@@ -86,6 +88,9 @@
 
 					</ul>
 				</li>
+
+				<li><a href="{{ route('blogs') }}">Blog</a></li>
+
 				
 				<li><a href="{{ route('contato') }}">Contato</a></li>
 			

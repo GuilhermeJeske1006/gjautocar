@@ -5,6 +5,7 @@ use App\Http\Controllers\AutomovelController;
 use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SobreController;
+use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,5 +40,11 @@ Route::get('/add-favoritos', [AutomovelController::class, 'AddFavoritos'])->name
 
 Route::get('/remove-favoritos', [AutomovelController::class, 'removeFavoritos'])->name('remove-Favoritos');
 
-
 Route::post('/enviar-contato', [ContatoController::class, 'enviarFormulario'])->name('enviar_contato');
+
+
+Route::post('/enviar-comentario', [BlogController::class, 'enviarComentario'])->name('enviar_comentario');
+
+Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
+
+Route::get('/blog/{id}', [BlogController::class, 'show'])->name('detalhes-blog');

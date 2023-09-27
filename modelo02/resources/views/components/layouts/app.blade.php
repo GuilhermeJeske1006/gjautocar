@@ -17,11 +17,12 @@
 <!-- Favicon -->
 <link href="images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
 <link href="images/favicon.ico" sizes="128x128" rel="shortcut icon" />
-
+<meta name="api-base" content="{{ env('API_BASE') }}">
+<meta name="empresa-id" content="{{ env('EMPRESA_ID') }}">
 </head>
 <body>
 <div class="wrapper">
-	<div class="preloader"></div>
+	{{-- <div class="preloader"></div> --}}
 
 	@livewire('componentes.menu')
 

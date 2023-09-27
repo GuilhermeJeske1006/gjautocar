@@ -1,7 +1,12 @@
 <?php
 
+use App\Livewire\Automoveis\Lista;
+use App\Livewire\Automoveis\Detalhes;
+
 use App\Livewire\Home\Index;
 use App\Livewire\Sobre\Index as SobreIndex;
+use App\Livewire\Contato\Index as ContatoIndex;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,3 +22,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Index::class);
 Route::get('/sobre', SobreIndex::class);
+Route::get('/automoveis', Lista::class)->name('listar');
+Route::get('/automovel/{id}', Detalhes::class)->name('detalhes');
+Route::get('/contato', ContatoIndex::class)->name('contato');

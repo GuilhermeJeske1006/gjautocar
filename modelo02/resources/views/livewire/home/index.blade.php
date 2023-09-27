@@ -1,6 +1,7 @@
 <div>
 <!-- 6th Home Design -->
-@livewire('home.apoio.banner')
+@livewire('home.apoio.banner', ['marcas' => $marcas, 'categorias' => $categorias, 'site' => $site])
+
 
 <!-- Feature Properties -->
 <section id="feature-property" class="feature-property-home6">
@@ -8,15 +9,15 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="main-title mb40">
-                    <h2>Featured Properties</h2>
-                    <p>Handpicked properties by our team. <a class="float-right" href="#">View All <span class="flaticon-next"></span></a></p>
+                    <h2>Nossos destaques</h2>
+                    <p>As melhores oportunidades para investir <a class="float-right" href="{{ route('listar') }}">Ver todos <span class="flaticon-next"></span></a></p>
                 </div>
             </div>
             <div class="col-lg-12">
                 <div class="feature_property_home6_slider">
-                    @for($i = 0; $i < 10; $i++)
-                    @livewire('automoveis.apoio.card')
-                    @endfor
+                    @foreach ($automovel as $item)
+                    @livewire('automoveis.apoio.card', ['item' => $item])
+                    @endforeach
                 </div>
             </div>
         </div>

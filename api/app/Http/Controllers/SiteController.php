@@ -12,6 +12,7 @@ use App\Http\Resources\SiteResource;
 use App\Models\TipoAutomovel;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use App\Models\Sobre;
 
 
 class SiteController extends Controller
@@ -22,15 +23,34 @@ class SiteController extends Controller
     public function index($id, Request $request)
     {
         $empresa = Empresa::findOrFail($id);
+
         $empresa->logo = Storage::disk('s3')->url("empresas/".$empresa->logo);
 
         $endereco = Endereco::findOrFail($empresa->endereco_id);
 
-        $automoveis = $this->getAutomoveis($empresa, $request->input('search'), $request, $request->input('ordenacao'));
+        $blogs = $this->getBlogs($empresa, $request->input('search'));
+
+        $sobre = $this->getSobre($empresa);
+
+        $automoveis = $this->getAutomoveis($empresa,
+        $request->input('search'),
+        $request,
+        $request->input('ordenacao')
+    );
+
         $categoriasAutomovel = $this->getCategoriasAutomovel();
+
         $tipoAutomovel = $this->getTipoAutomovel();
 
-        return new SiteResource($empresa, $endereco, $automoveis, $categoriasAutomovel, $tipoAutomovel);
+        return new SiteResource(
+        $empresa,
+        $endereco, 
+        $automoveis, 
+        $categoriasAutomovel,
+        $tipoAutomovel,
+        $blogs,
+        $sobre
+    );
     }
 
     private function getAutomoveis(Empresa $empresa, $search = null, $filtro = null, $ordenacao = null)
@@ -119,6 +139,32 @@ class SiteController extends Controller
         }
 
         return $automoveis;
+    }
+
+    private function getBlogs(Empresa $empresa, $search = null)
+    {
+        $query = $empresa->blogs();
+
+        if ($search) {
+            $query->where('titulo', 'like', '%' . $search . '%');
+        }
+
+        $blogs = $query->get();
+
+        foreach ($blogs as $blog) {
+            $blog->foto = Storage::disk('s3')->url("blog/" . $blog->foto);
+        }
+
+        return $blogs;
+    }
+
+    private function getSobre(Empresa $empresa)
+    {
+        $sobre = Sobre::where('empresa_id', $empresa->id)->first();
+
+        // $sobre->foto = Storage::disk('s3')->url("sobre/" . $sobre->foto);
+
+        return $sobre;
     }
 
 
